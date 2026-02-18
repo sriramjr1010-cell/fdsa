@@ -1,0 +1,31 @@
+import numpy as np      # linear algebra
+import pandas as pd     # data processing
+import nltk
+
+items = ['apple', 'apple', 'kiwi', 'cabbage', 'cabbage', 'potato']
+
+# Frequency Distribution
+fd = nltk.FreqDist(items)
+print("Frequency Distribution:")
+print(fd)
+
+# Conditional Frequency Distribution
+c_items = [
+    ('F', 'apple'),
+    ('F', 'apple'),
+    ('F', 'kiwi'),
+    ('V', 'cabbage'),
+    ('V', 'cabbage'),
+    ('V', 'potato')
+]
+
+cfd = nltk.ConditionalFreqDist(c_items)
+
+print("\nConditions:")
+print(cfd.conditions())
+
+# Plot the Conditional Frequency Distribution
+cfd.plot()
+
+print("\nVegetable Category:")
+print(cfd['V'])

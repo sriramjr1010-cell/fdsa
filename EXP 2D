@@ -1,0 +1,21 @@
+# importing pandas
+import pandas as pd
+
+# importing numpy
+import numpy as np
+
+# dictionary of lists
+data = {
+    'First Score': [100, 90, np.nan, 95],
+    'Second Score': [30, 45, 56, np.nan],
+    'Third Score': [np.nan, 40, 80, 98]
+}
+
+# creating a dataframe
+df = pd.DataFrame(data)
+
+print(df)
+
+# using isnull() function
+print("\nCheck for missing values:")
+print(df.isnull())

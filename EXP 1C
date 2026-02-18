@@ -1,0 +1,22 @@
+import numpy as np
+
+# array to begin with
+a = np.array([[1,2,3],
+              [3,4,5],
+              [4,5,6]])
+
+print("Our array is:")
+print(a)
+
+# This returns items in the second column
+print("\nThe items in the second column are:")
+print(a[..., 1])
+
+# This returns items in the second row
+print("\nThe items in the second row are:")
+print(a[1, ...])
+
+# This returns items from column 1 onwards
+print("\nThe items column 1 onwards are:")
+print(a[..., 1:])
+

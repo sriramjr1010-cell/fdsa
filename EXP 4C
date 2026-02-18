@@ -1,0 +1,25 @@
+import nltk
+from nltk.corpus import names
+
+# Create conditional frequency distribution
+nt = [
+    (fid.split('.')[0], name[-1])
+    for fid in names.fileids()
+    for name in names.words(fid)
+]
+
+cfd2 = nltk.ConditionalFreqDist(nt)
+
+# Count names ending with 'a'
+print("Female names ending with 'a':", cfd2['female']['a'])
+print("Male names ending with 'a':", cfd2['male']['a'])
+
+# Compare female vs male
+print("Female > Male:", cfd2['female'] > cfd2['male'])
+
+# Tabulate
+cfd2.tabulate(samples=['a', 'e'])
+
+# Plot
+cfd2.plot()
+
