@@ -1,0 +1,28 @@
+# imports
+import math
+import numpy as np
+from numpy.random import randn
+from statsmodels.stats.weightstats import ztest
+
+# Generate a random array of 50 numbers having mean 110 and sd 15
+mean_iq = 110
+sd_iq = 15 / math.sqrt(50)
+alpha = 0.05
+null_mean = 100
+
+data = sd_iq * randn(50) + mean_iq
+
+# print mean and standard deviation
+print('mean = %.2f stdv = %.2f' % (np.mean(data), np.std(data)))
+
+# Perform one-sample z-test (alternative: mean > null_mean)
+ztest_score, p_value = ztest(data, value=null_mean, alternative='larger')
+
+print('Z-score:', ztest_score)
+print('P-value:', p_value)
+
+# Decision
+if p_value < alpha:
+    print("Reject Null Hypothesis")
+else:
+    print("Fail to Reject Null Hypothesis")
