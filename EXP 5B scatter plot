@@ -1,0 +1,15 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({'figure.figsize': (10, 8), 'figure.dpi': 100})
+
+x = np.arange(50)
+y = np.arange(50) + np.random.randint(0, 30, 50)
+
+plt.scatter(x, y)
+
+plt.title('Simple Scatter Plot')
+plt.xlabel('X - value')
+plt.ylabel('Y - value')
+
+plt.show()
