@@ -1,0 +1,45 @@
+import numpy as np
+from scipy import stats
+
+# Sample size
+N = 10
+
+# Generate random samples
+x = np.random.randn(N) + 2  # Sample 1: mean ~2
+y = np.random.randn(N)      # Sample 2: mean ~0
+
+# Calculate sample variances
+var_x = x.var(ddof=1)
+var_y = y.var(ddof=1)
+
+# Pooled standard deviation
+SD = np.sqrt((var_x + var_y) / 2)
+
+# Print sample means and pooled SD
+print("Sample 1 Mean =", x.mean())
+print("Sample 2 Mean =", y.mean())
+print("Pooled Standard Deviation =", SD)
+
+# Manual t-test calculation
+tval = (x.mean() - y.mean()) / (SD * np.sqrt(2 / N))
+dof = 2 * N - 2
+pval = 1 - stats.t.cdf(tval, df=dof)
+
+print("\nManual Calculation")
+print("t value =", tval)
+print("p value =", 2 * pval)  # two-tailed p-value
+
+# Using SciPy built-in t-test
+tval2, pval2 = stats.ttest_ind(x, y)
+print("\nUsing scipy function")
+print("t value =", tval2)
+print("p value =", pval2)
+
+# Hypothesis testing decision
+alpha = 0.05
+if pval2 < alpha:
+    print("\nDecision: Reject Null Hypothesis")
+    print("Conclusion: There is a significant difference between the means")
+else:
+    print("\nDecision: Fail to Reject Null Hypothesis")
+    print("Conclusion: No significant difference between the means")
