@@ -1,0 +1,28 @@
+# Importing required libraries
+import pandas as pd
+import scipy.stats as stats
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+# Example data (wide format)
+df = pd.DataFrame({
+    'A': [5, 6, 7, 5, 6],
+    'B': [8, 9, 7, 8, 9],
+    'C': [5, 6, 5, 6, 5],
+    'D': [7, 8, 7, 8, 7]
+})
+
+# ANOVA using scipy
+fvalue, pvalue = stats.f_oneway(df['A'], df['B'], df['C'], df['D'])
+print("F-value:", fvalue)
+print("p-value:", pvalue)
+
+# Convert wide to long format for statsmodels
+df_melt = df.melt(var_name='treatments', value_name='value')
+
+# ANOVA using statsmodels
+model = ols('value ~ C(treatments)', data=df_melt).fit()
+anova_table = sm.stats.anova_lm(model, typ=2)
+
+print("\nANOVA Table:")
+print(anova_table)
